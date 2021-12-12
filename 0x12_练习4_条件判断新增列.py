@@ -10,7 +10,15 @@
 import openpyxl
 
 
-wb = openpyxl.load_workbook(r'./课件/测试2.xlsx')
+wb = openpyxl.load_workbook(r'./课件/练习2.xlsx')
 ws = wb['Sheet1']
 
-wb.save(r'./课件/测试2_my.xlsx')
+ws['E1'] = '评价'
+workRange = ws.iter_rows(min_row=2, min_col=2)
+for rows in workRange:
+    aaa = [i.value for i in rows][:-1]
+    if sum(aaa) >= 270:
+        rows[-1].value = '优秀'
+
+wb.save(r'./课件/练习2_my.xlsx')
+wb.close
